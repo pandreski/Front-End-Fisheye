@@ -1,0 +1,12 @@
+{
+  "name": "Fisheye",
+  "version": "1.0.0",
+  "description": "Openclassrooms - P6",
+  "main": "index.js",
+  "repository": "git@github.com:pandreski/Front-End-Fisheye.git",
+  "author": "Pierre ANDRESKI <pierre.andreski@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.24.0"
+  }
+}

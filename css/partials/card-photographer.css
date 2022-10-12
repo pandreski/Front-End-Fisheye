@@ -1,0 +1,33 @@
+.card-photographer a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.card-photographer a:hover h2 {
+    color: var(--color-primary);
+}
+
+.card-photographer h2 {
+    margin-bottom: 0;
+    transition: color .2s ease-in-out;
+}
+
+.card-photographer .location,
+.card-photographer .legend,
+.card-photographer .rate {
+    margin: .3rem 0 0;
+}
+
+.card-photographer .location {
+    font-size: .8125em;
+}
+
+.card-photographer .legend {
+    font-size: .6250em;
+}
+
+.card-photographer .rate {
+    font-size: .5625em;
+    color: #757575;
+}

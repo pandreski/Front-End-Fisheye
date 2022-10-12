@@ -1,36 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
   <head>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <title>Fisheye - photographe</title>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
-    <title>Fisheye - photographe </title>
+    <script src="https://kit.fontawesome.com/341d03b7ae.js" crossorigin="anonymous"></script>
+    <link href="css/main.css" rel="stylesheet" type="text/css">
   </head>
-  <body>
+  <body aria-hidden="false">
     <header>
-      <img src="assets/images/logo.png" class="logo" />
+      <a href="index.html" aria-label="Retour à la page d'accueil">
+        <img src="assets/images/logo.png" alt="Logo Fisheye" class="logo">
+      </a>
     </header>
     <main id="main">
       <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <div class="photograph-header__data"></div>
+        <div class="photograph-header__contact">
+          <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        </div>
+        <div class="photograph-header__image"></div>
       </div>
+
+      <div class="sorting-wrapper">
+        <p id="listboxSortLabel">Trier par</p>
+        <div class="sorting-dropdown">
+          <button id="listboxSortButton" type="button" role="button" class="selected-sorting" aria-haspopup="listbox" aria-expanded="false"></button>
+          <div
+              role="listbox"
+              tabindex="0"
+              id="listboxSort"
+              aria-labelledby="listboxSortLabel"
+              aria-activedescendant="listboxSort-1">
+            <div role="option" id="listboxSort-1" aria-selected="true">Popularité</div>
+            <div role="option" id="listboxSort-2" aria-selected="false">Date</div>
+            <div role="option" id="listboxSort-3" aria-selected="false">Titre</div>
+          </div>
+        </div>
+      </div>
+
+      <article class="artworks">
+
+      </article>
     </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
+    <div class="modal" aria-hidden="true" aria-labelledby="modal-title" role="dialog">
+      <header>
+        <h2 id="modal-title">Contactez-moi</h2>
+        <img src="assets/icons/close.svg" alt="" onclick="closeModal()">
+      </header>
+      <form onsubmit="document.verifyForm();">
+        <label id="firstname-label" for="firstname">Prénom</label>
+        <input type="text" name="firstname" id="firstname" aria-labelledby="firstname-label"/>
+
+        <label id="lastname-label" for="lastname">Nom</label>
+        <input type="text" name="lastname" id="lastname" aria-labelledby="lastname-label"/>
+
+        <label id="email-label" for="email">Email</label>
+        <input type="email" name="email" id="email" aria-labelledby="email-label"/>
+
+        <label id="message-label" for="message">Votre message</label>
+        <textarea id="message" name="message" aria-labelledby="message-label"></textarea>
+
+        <button type="submit" class="contact_button">Envoyer</button>
+      </form>
+    </div>
+    <script src="scripts/factories/photographer.js"></script>
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
