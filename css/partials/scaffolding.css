@@ -14,6 +14,10 @@ body {
   width: 1240px;
 }
 
+body[aria-hidden="true"] {
+  overflow: hidden;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;

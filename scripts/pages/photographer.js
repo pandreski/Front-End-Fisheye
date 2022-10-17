@@ -1,41 +1,72 @@
 let sortButton;
 let sortDropDown;
 let sortOptions;
+let photographers;
+let mediaList;
+let currentUserId;
+let currentUserData;
 
-async function getPhotographerById(id) {
-  const data = await fetch('../../data/photographers.json')
-    .then(response => response.json());
+async function setDataSource() {
+  try {
+    const data = await fetch('../../data/photographers.json')
+      .then(response => response.json());
 
-  return data.photographers.filter(elem => elem.id.toString() === id);
+    photographers = data.photographers;
+    mediaList = data.media;
+  } catch(error) {
+    console.error(error);
+  }
 }
 
-async function getMediaListById(id) {
-  const data = await fetch('../../data/photographers.json')
-    .then(response => response.json());
-
-  return data.media.filter(elem => elem.photographerId.toString() === id);
+/**
+ * Get user data by ID
+ * 
+ * @param {Number} id  The user ID
+ * @returns {Object} The user data object
+ */
+async function getUserById(id) {
+  return photographers.filter(user => user.id === parseInt(id));
 }
 
-async function displayHeader(data) {
+/**
+ * Get user's media list.
+ * 
+ * @param {Number} id The user ID
+ * @returns {Object} List of media
+ */
+function getMedia(id) {
+  return mediaList.filter(media => media.photographerId === parseInt(id));
+}
+
+// Populate page with user's informations (banner and modal)
+async function displayUserData() {
   const headerData = document.querySelector('.photograph-header__data');
   const headerImage = document.querySelector('.photograph-header__image');
-  const photographerModel = photographerFactory(data[0]);
+  const modalTitle = document.getElementById('modal-title');
+  const photographerModel = photographerFactory(currentUserData[0]);
 
   headerData.appendChild(photographerModel.getBannerData());
-  headerImage.appendChild(photographerModel.getBannerImage());
+  headerImage.appendChild(photographerModel.getUserImage());
+  modalTitle.innerHTML += `<span>${photographerModel.name}</span>`;
 }
 
-async function displayArtwork(data, artworkList) {
+/**
+ * Display given media list
+ * 
+ * @param {Object} list Media list
+ */
+function displayArtwork(list) {
   const artworkSection = document.querySelector('.artworks');
+  artworkSection.innerHTML = '';
 
-  artworkList.forEach((artwork) => {
-    const photographerModel = photographerFactory(data);
-    const userArtworkDOM = photographerModel.getUserArtworkDOM(artwork);
-    console.log(userArtworkDOM);
+  list.forEach((artwork) => {
+    const mediaModel = mediaFactory(artwork);
+    const userArtworkDOM = mediaModel.getUserArtworkDOM();
     artworkSection.appendChild(userArtworkDOM);
   });
 }
 
+// Update label of sorting button
 function updateSortButtonLabel(activeOption) {
   sortButton.innerText = activeOption.innerText;
 }
@@ -49,12 +80,52 @@ function getActiveSortingOption() {
   }
 }
 
+// Populate aside elements
+async function displayAside() {
+  const counter = document.querySelector('.photographer-infos .counter');
+  const price = document.querySelector('.photographer-infos .price');
+  const artworkList = getMedia(currentUserId);
+  let sum = null;
+
+  artworkList.forEach((media) => { sum += media.likes })
+
+  counter.innerText = sum;
+  price.innerText = currentUserData[0].price + '€ / jour';
+}
+
 function openSortingDropDown() {
   sortButton.setAttribute('aria-expanded', 'true');
 }
 
 function closeSortingDropDown() {
   sortButton.setAttribute('aria-expanded', 'false');
+}
+
+/**
+ * Sort artwork list according to the selected sorting option.
+ * Sort by popularity by default.
+ * 
+ * @param {String} option Sorting ID
+ */
+function sortArtwork(option) {
+  const artworkList = getMedia(currentUserId);
+  switch(option) {
+    case 'listboxSort-1': // Popularity
+    default:
+      artworkList.sort((a, b) => b.likes - a.likes);
+      break;
+    case 'listboxSort-2': // Date
+      artworkList.sort((a, b) => {
+        const dateA = new Date(a.date);
+        const dateB = new Date(b.date);
+        return dateB - dateA;
+      });
+      break;
+    case 'listboxSort-3': // Title
+      artworkList.sort((a, b) => a.title.localeCompare(b.title));
+      break;
+  }
+  displayArtwork(artworkList);
 }
 
 // Set active option's aria value + button label + dropdown "aria-activedescendant" attribute
@@ -98,24 +169,33 @@ function sorting() {
     option.addEventListener('click', function(oEvt) {
       resetActiveOptions();
       setActiveOption(oEvt.target);
+      sortArtwork(oEvt.target.id);
     });
   }
 }
 
+function initModal() {
+  const modalCta = document.querySelector('.contact_button');
+  const closeModalCta = document.querySelector('.modal .close-btn');
+
+  modalCta.addEventListener('click', displayModal);
+  closeModalCta.addEventListener('click', closeModal);
+}
+
 async function init() {
   const urlParams = (new URL(document.location)).searchParams;
-  const paramId = urlParams.get('id');
+  currentUserId = urlParams.get('id');
 
-  if (typeof paramId === 'undefined') {
+  if (typeof currentUserId === 'undefined') {
     return;
   }
 
-  const photographerData = await getPhotographerById(paramId);
-  const photographerArtwork = await getMediaListById(paramId);
-
-  await displayHeader(photographerData);
-  await displayArtwork(photographerData, photographerArtwork);
+  sorting();
+  await setDataSource();
+  currentUserData = await getUserById(currentUserId);
+  await displayUserData().then(initModal);
+  await sortArtwork();
+  await displayAside();
 }
 
 init();
-sorting();

@@ -68,12 +68,17 @@
 .card-artwork .media-wrapper {
   position: relative;
   display: block;
+  cursor: pointer;
 }
 
 .card-artwork .media-wrapper:before {
   content: '';
   display: block;
   padding-bottom: 85.714%;
+}
+
+.card-artwork .media-wrapper:focus {
+  outline: 2px solid var(--color-primary);
 }
 
 .card-artwork img,
@@ -124,69 +129,33 @@
   left: 50%;
   transform: translate(-50%,-50%);
   color: var(--color-primary);
-}
-/* 
-.like-button .fa-regular {
-  transition: opacity .5s ease-in-out;
+  transition: opacity .4s ease-in-out;
 }
 
 .like-button .fa-solid {
-  opacity: 0;
-  transition: opacity .5s ease-in-out;
-}
-
-.like-button[aria-selected="true"] .fa-solid {
   opacity: 0;
 }
 
 .like-button[aria-selected="true"] .fa-solid {
   opacity: 1;
-} */
+}
 
-.modal {
-  border-radius: 5px;
-  background-color: #DB8876;
-  width: 50%;
+.like-button[aria-selected="true"] .fa-regular {
+  opacity: 0;
+}
+
+.photographer-infos {
+  position: fixed;
+  bottom: 0;
+  right: 36px;
+  background-color: var(--color-secondary);
+  color: black;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 35px;
-  margin: auto;
+  padding: 20px 34px 14px;
+  font-size: 1.5em;
+  border-radius: 5px 5px 0 0;
 }
 
-.modal header {
-  justify-content: space-between;
-  width: 100%;
-}
-
-.modal header img {
-  cursor: pointer;
-}
-
-form {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-form label {
-  color: #312E2E;
-  font-size: 36px;
-}
-
-form div {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: self-start;
-  margin-bottom: 26px;
-}
-
-form input {
-  width: 100%;
-  height: 68px;
-  border: none;
-  border-radius: 5px;
+.photographer-infos .price {
+  margin-left: 65px;
 }

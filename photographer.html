@@ -8,7 +8,7 @@
     <script src="https://kit.fontawesome.com/341d03b7ae.js" crossorigin="anonymous"></script>
     <link href="css/main.css" rel="stylesheet" type="text/css">
   </head>
-  <body aria-hidden="false">
+  <body aria-hidden="false" data-modal-open="false">
     <header>
       <a href="index.html" aria-label="Retour à la page d'accueil">
         <img src="assets/images/logo.png" alt="Logo Fisheye" class="logo">
@@ -18,7 +18,7 @@
       <div class="photograph-header">
         <div class="photograph-header__data"></div>
         <div class="photograph-header__contact">
-          <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+          <button class="contact_button">Contactez-moi</button>
         </div>
         <div class="photograph-header__image"></div>
       </div>
@@ -40,32 +40,43 @@
         </div>
       </div>
 
-      <article class="artworks">
+      <article class="artworks"></article>
 
-      </article>
+      <aside class="photographer-infos">
+        <div class="total-likes">
+          <span class="counter"></span>
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <div class="price"></div>
+      </aside>
     </main>
     <div class="modal" aria-hidden="true" aria-labelledby="modal-title" role="dialog">
-      <header>
-        <h2 id="modal-title">Contactez-moi</h2>
-        <img src="assets/icons/close.svg" alt="" onclick="closeModal()">
-      </header>
-      <form onsubmit="document.verifyForm();">
-        <label id="firstname-label" for="firstname">Prénom</label>
-        <input type="text" name="firstname" id="firstname" aria-labelledby="firstname-label"/>
-
-        <label id="lastname-label" for="lastname">Nom</label>
-        <input type="text" name="lastname" id="lastname" aria-labelledby="lastname-label"/>
-
-        <label id="email-label" for="email">Email</label>
-        <input type="email" name="email" id="email" aria-labelledby="email-label"/>
-
-        <label id="message-label" for="message">Votre message</label>
-        <textarea id="message" name="message" aria-labelledby="message-label"></textarea>
-
-        <button type="submit" class="contact_button">Envoyer</button>
-      </form>
+      <div class="modal-wrapper">
+        <header>
+          <h2 id="modal-title">Contactez-moi</h2>
+          <img src="assets/icons/close.svg" alt="Fermer la modale" class="close-btn">
+        </header>
+        <form id="contact-form" method="post">
+          <label id="firstname-label" for="firstname">Prénom</label>
+          <input type="text" name="firstname" id="firstname" aria-labelledby="firstname-label" aria-required="true"/>
+  
+          <label id="lastname-label" for="lastname">Nom</label>
+          <input type="text" name="lastname" id="lastname" aria-labelledby="lastname-label" aria-required="true"/>
+  
+          <label id="email-label" for="email">Email</label>
+          <input type="email" name="email" id="email" aria-labelledby="email-label" aria-required="true"/>
+  
+          <label id="message-label" for="message">Votre message</label>
+          <textarea id="message" name="message" aria-labelledby="message-label" aria-required="true"></textarea>
+  
+          <button type="submit" class="contact_button">Envoyer</button>
+        </form>
+      </div>
     </div>
+    <div class="overlay"></div>
     <script src="scripts/factories/photographer.js"></script>
+    <script src="scripts/factories/media.js"></script>
+    <script src="/scripts/utils/contactForm.js"></script>
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
   </body>
