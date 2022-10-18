@@ -8,7 +8,7 @@
     <script src="https://kit.fontawesome.com/341d03b7ae.js" crossorigin="anonymous"></script>
     <link href="css/main.css" rel="stylesheet" type="text/css">
   </head>
-  <body aria-hidden="false" data-modal-open="false">
+  <body aria-hidden="false" data-modal-open="false" data-lightbox-open="false">
     <header>
       <a href="index.html" aria-label="Retour à la page d'accueil">
         <img src="assets/images/logo.png" alt="Logo Fisheye" class="logo">
@@ -54,7 +54,7 @@
       <div class="modal-wrapper">
         <header>
           <h2 id="modal-title">Contactez-moi</h2>
-          <img src="assets/icons/close.svg" alt="Fermer la modale" class="close-btn">
+          <img src="assets/icons/close-white.svg" alt="Fermer la modale" class="close-btn">
         </header>
         <form id="contact-form" method="post">
           <label id="firstname-label" for="firstname">Prénom</label>
@@ -73,9 +73,20 @@
         </form>
       </div>
     </div>
+    <div class="lightbox" role="dialog" aria-hidden="true">
+      <div class="lightbox-wrapper">
+        <figure class="media">
+          <figcaption class="lightbox-title"></figcaption>
+        </figure>
+        <button class="lightbox-navigation next" aria-label="Suivant"><img src="assets/icons/chevron.svg" alt=""></button>
+        <button class="lightbox-navigation prev" aria-label="Précédent"><img src="assets/icons/chevron.svg" alt=""></button>
+        <img src="assets/icons/close.svg" alt="Fermer la modale" class="close-btn">
+      </div>
+    </div>
     <div class="overlay"></div>
     <script src="scripts/factories/photographer.js"></script>
     <script src="scripts/factories/media.js"></script>
+    <script src="scripts/component/lightbox.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>
     <script src="/scripts/pages/photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>

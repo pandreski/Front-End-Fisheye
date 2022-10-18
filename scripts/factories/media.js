@@ -14,18 +14,21 @@ function mediaFactory(data) {
       media = document.createElement('img');
       media.src = `assets/images/${photographerId}/${image}`;
       media.alt = `Photographie "${title}"`;
+      media.setAttribute('loading', 'lazy');
     } else if (typeof video !== 'undefined') {
       media = document.createElement('video');
       media.width = 350;
       media.height = 300;
       const mediaSource = document.createElement('source');
-      media.id = 'video-' + id;
+      // media.id = 'video-' + id;
       mediaSource.src = `assets/images/${photographerId}/${video}`;
       mediaSource.type = 'video/mp4';
       media.appendChild(mediaSource);
       media.innerHTML += 'Your browser does not support the video tag.';
     }
     media.setAttribute('aria-label', 'Cliquez sur cette image pour l\'agrandir');
+    media.setAttribute('data-media-id', id);
+    media.addEventListener('click', handleMediaClick);
 
     mediaWrapper.appendChild(media);
 

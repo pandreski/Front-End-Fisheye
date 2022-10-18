@@ -5,6 +5,7 @@ let photographers;
 let mediaList;
 let currentUserId;
 let currentUserData;
+let currentUserMediaList;
 
 async function setDataSource() {
   try {
@@ -34,11 +35,13 @@ async function getUserById(id) {
  * @param {Number} id The user ID
  * @returns {Object} List of media
  */
-function getMedia(id) {
+function getUserMedia(id) {
   return mediaList.filter(media => media.photographerId === parseInt(id));
 }
 
-// Populate page with user's informations (banner and modal)
+/**
+ * Populate page with user's informations (banner and modal)
+ */
 async function displayUserData() {
   const headerData = document.querySelector('.photograph-header__data');
   const headerImage = document.querySelector('.photograph-header__image');
@@ -71,7 +74,11 @@ function updateSortButtonLabel(activeOption) {
   sortButton.innerText = activeOption.innerText;
 }
 
-// Get active sorting option element
+/**
+ * Get active sorting option's name
+ * 
+ * @returns {String} Option ID
+ */
 function getActiveSortingOption() {
   for (let option of sortOptions) {
     if (option.getAttribute('aria-selected') === 'true') {
@@ -80,14 +87,16 @@ function getActiveSortingOption() {
   }
 }
 
-// Populate aside elements
+/**
+ * Populate aside elements
+ */
 async function displayAside() {
   const counter = document.querySelector('.photographer-infos .counter');
   const price = document.querySelector('.photographer-infos .price');
-  const artworkList = getMedia(currentUserId);
+  const artworkList = getUserMedia(currentUserId);
   let sum = null;
 
-  artworkList.forEach((media) => { sum += media.likes })
+  artworkList.forEach((media) => { sum += media.likes });
 
   counter.innerText = sum;
   price.innerText = currentUserData[0].price + '€ / jour';
@@ -108,7 +117,7 @@ function closeSortingDropDown() {
  * @param {String} option Sorting ID
  */
 function sortArtwork(option) {
-  const artworkList = getMedia(currentUserId);
+  const artworkList = getUserMedia(currentUserId);
   switch(option) {
     case 'listboxSort-1': // Popularity
     default:
@@ -125,10 +134,15 @@ function sortArtwork(option) {
       artworkList.sort((a, b) => a.title.localeCompare(b.title));
       break;
   }
+  currentUserMediaList = artworkList;
   displayArtwork(artworkList);
 }
 
-// Set active option's aria value + button label + dropdown "aria-activedescendant" attribute
+/**
+ * Set active option's aria value + button label + dropdown "aria-activedescendant" attribute
+ * 
+ * @param {String} option 
+ */
 function setActiveOption(option) {
   updateSortButtonLabel(option);
   sortDropDown.setAttribute('aria-activedescendant', option.id);
@@ -136,14 +150,18 @@ function setActiveOption(option) {
   closeSortingDropDown();
 }
 
-// Set all sorting options to "false"
+/**
+ * Set all sorting options to "false"
+ */
 function resetActiveOptions() {
   for (let option of sortOptions) {
     option.setAttribute('aria-selected', 'false');
   }
 }
 
-// Init sorting dropdown
+/**
+ * Init sorting dropdown
+ */
 function sorting() {
   sortButton = document.getElementById('listboxSortButton');
   sortDropDown = document.getElementById('listboxSort');
@@ -174,6 +192,9 @@ function sorting() {
   }
 }
 
+/**
+ * Initialize modale
+ */
 function initModal() {
   const modalCta = document.querySelector('.contact_button');
   const closeModalCta = document.querySelector('.modal .close-btn');
