@@ -4,7 +4,9 @@
     <title>Fisheye - photographe</title>
     <meta charset="utf-8">
     <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/341d03b7ae.js" crossorigin="anonymous"></script>
     <link href="css/main.css" rel="stylesheet" type="text/css">
   </head>
@@ -56,21 +58,30 @@
           <h2 id="modal-title">Contactez-moi</h2>
           <img src="assets/icons/close-white.svg" alt="Fermer la modale" class="close-btn">
         </header>
-        <form id="contact-form" method="post">
-          <label id="firstname-label" for="firstname">Prénom</label>
-          <input type="text" name="firstname" id="firstname" aria-labelledby="firstname-label" aria-required="true"/>
+        <form id="contact-form" method="post" target="frame" aria-hidden="false">
+          <div class="form-data">
+            <label id="firstname-label" for="firstname">Prénom</label>
+            <input type="text" name="firstname" id="firstname" aria-labelledby="firstname-label" aria-required="true"/>
+          </div>
+
+          <div class="form-data">
+            <label id="lastname-label" for="lastname">Nom</label>
+            <input type="text" name="lastname" id="lastname" aria-labelledby="lastname-label" aria-required="true"/>
+          </div>
   
-          <label id="lastname-label" for="lastname">Nom</label>
-          <input type="text" name="lastname" id="lastname" aria-labelledby="lastname-label" aria-required="true"/>
+          <div class="form-data">
+            <label id="email-label" for="email">Email</label>
+            <input type="email" name="email" id="email" aria-labelledby="email-label" aria-required="true"/>
+          </div>
   
-          <label id="email-label" for="email">Email</label>
-          <input type="email" name="email" id="email" aria-labelledby="email-label" aria-required="true"/>
-  
-          <label id="message-label" for="message">Votre message</label>
-          <textarea id="message" name="message" aria-labelledby="message-label" aria-required="true"></textarea>
+          <div class="form-data">
+            <label id="message-label" for="message">Votre message</label>
+            <textarea id="message" name="message" aria-labelledby="message-label" aria-required="true"></textarea>
+          </div>
   
           <button type="submit" class="contact_button">Envoyer</button>
         </form>
+        <div class="confirmation" aria-hidden="true">Votre message a bien été envoyé</div>
       </div>
     </div>
     <div class="lightbox" role="dialog" aria-hidden="true">
@@ -84,6 +95,7 @@
       </div>
     </div>
     <div class="overlay"></div>
+    <iframe name="frame"></iframe>
     <script src="scripts/factories/photographer.js"></script>
     <script src="scripts/factories/media.js"></script>
     <script src="scripts/component/lightbox.js"></script>
