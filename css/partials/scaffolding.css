@@ -4,6 +4,7 @@
   --color-secondary: #DB8876;
   --color-tertiary: #D3573C;
   --color-dark-grey: #525252;
+  --color-light-grey: #FAFAFA;
 }
 
 body {
@@ -67,4 +68,24 @@ iframe[name="frame"] {
 
 *:focus {
   outline: 3px dotted var(--color-primary);
+}
+
+.btn {
+  font-size: 1.25em;
+  font-weight: bold;
+  color: white;
+  padding: 11px;
+  border: none;
+  background-color: var(--color-primary);
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 auto;
+  transition: all .2s ease-in-out;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background-color: var(--color-secondary);
+  color: #000;
 }

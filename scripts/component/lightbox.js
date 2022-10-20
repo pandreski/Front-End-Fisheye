@@ -32,6 +32,7 @@ function closeLightbox() {
   document.body.setAttribute('aria-hidden', 'false');
   document.body.setAttribute('data-lightbox-open', 'false');
   lightbox.setAttribute('aria-hidden', 'true');
+  document.removeEventListener('keyup', handleKeyboard);
 }
 
 /**
@@ -102,7 +103,7 @@ function updateLightboxMedia(id) {
     media = `<img src="assets/images/${currentMediaData[0].photographerId}/${currentMediaData[0].image}" alt="${currentMediaData[0].title}" loading="lazy" />`;
   } else if (typeof currentMediaData[0].video !== 'undefined') {
     media = `
-      <video width="800" height="600" controls>
+      <video id="video-lightbox" width="800" height="600" controls>
         <source src="assets/images/${currentMediaData[0].photographerId}/${currentMediaData[0].video}" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
@@ -111,6 +112,40 @@ function updateLightboxMedia(id) {
 
   lightboxTitle.innerText = currentMediaData[0].title;
   lightboxMedia.insertAdjacentHTML('afterbegin', media);
+}
+
+/**
+ * Fires keyboard event.
+ * 
+ * @param {Event} evt 
+ */
+function handleKeyboard(evt) {
+  let video;
+
+  switch (evt.key) {
+    case 'ArrowLeft':
+      setMediaPrev();
+      break;
+    case 'ArrowRight':
+      setMediaNext();
+      break;
+    case 'Escape':
+      closeLightbox();
+      break;
+    case ' ':
+      evt.preventDefault();
+      video = document.getElementById('video-lightbox');
+      if (video !== null) {
+        video.paused ? video.play() : video.pause();
+      }
+      break;
+    default:
+      break;
+  }
+}
+
+function initKeyboardNav() {
+  document.addEventListener('keyup', handleKeyboard);
 }
 
 /**
@@ -123,6 +158,7 @@ function handleMediaClick(evt) {
   
   openLightbox();
   updateLightboxMedia(mediaId);
+  initKeyboardNav();
   lightbox.querySelector('.close-btn').addEventListener('click', closeLightbox);
   lightbox.querySelector('.lightbox-navigation.next').addEventListener('click', setMediaNext);
   lightbox.querySelector('.lightbox-navigation.prev').addEventListener('click', setMediaPrev);

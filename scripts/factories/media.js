@@ -1,5 +1,5 @@
 function mediaFactory(data) {
-  const {id, photographerId, title, image, video, likes, date, price} = data;
+  const {id, photographerId, title, image, video, likes} = data;
 
   // Return an array with all current photographer artwork
   function getUserArtworkDOM() {
@@ -20,7 +20,6 @@ function mediaFactory(data) {
       media.width = 350;
       media.height = 300;
       const mediaSource = document.createElement('source');
-      // media.id = 'video-' + id;
       mediaSource.src = `assets/images/${photographerId}/${video}`;
       mediaSource.type = 'video/mp4';
       media.appendChild(mediaSource);

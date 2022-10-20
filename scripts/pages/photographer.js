@@ -203,6 +203,15 @@ function initModal() {
   closeModalCta.addEventListener('click', closeModal);
 }
 
+function userNotFound() {
+  const main = document.getElementById('main');
+
+  main.innerHTML = `<div class="user-not-found">
+    <h1 class="--color-primary style-h1">Utilisateur non trouvé</h1>
+    <p>Désolé, l'utilisateur que vous cherchez n'a pas été trouvé. <br><a href="/" class="btn">Retour à l'accueil</a></p>
+  </div>`
+}
+
 async function init() {
   const urlParams = (new URL(document.location)).searchParams;
   currentUserId = urlParams.get('id');
@@ -214,6 +223,12 @@ async function init() {
   sorting();
   await setDataSource();
   currentUserData = await getUserById(currentUserId);
+
+  if (!currentUserData.length) {
+    userNotFound();
+    return;
+  }
+
   await displayUserData().then(initModal);
   await sortArtwork();
   await displayAside();

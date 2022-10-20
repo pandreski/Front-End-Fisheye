@@ -3,7 +3,7 @@
 }
 
 .photograph-header {
-  background-color: #FAFAFA;
+  background-color: var(--color-light-grey);
   padding: 55px 50px;
   min-height: 300px;
   display: flex;
@@ -37,24 +37,8 @@
 }
 
 .contact_button {
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
-  padding: 11px;
   width: 170px;
   height: 70px;
-  border: none;
-  background-color: var(--color-primary);
-  border-radius: 5px;
-  cursor: pointer;
-  display: block;
-  margin: 0 auto;
-  transition: all .2s ease-in-out;
-}
-
-.contact_button:hover {
-  background-color: var(--color-secondary);
-  color: #000;
 }
 
 .artworks {
@@ -158,4 +142,17 @@
 
 .photographer-infos .price {
   margin-left: 65px;
+}
+
+.user-not-found {
+  background-color: var(--color-light-grey);
+  padding: 55px 50px;
+}
+
+.user-not-found p {
+  font-size: 1.125em;
+}
+
+.user-not-found p, .user-not-found .btn {
+  margin-top: 1em;
 }
