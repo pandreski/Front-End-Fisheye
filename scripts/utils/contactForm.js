@@ -1,7 +1,6 @@
 // DOM Elements
 const modalForm = document.querySelector('.modal form');
 const modalSuccessMessage = document.querySelector('.modal .confirmation');
-const regex_email = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
 function displayModal() {
   const modal = document.querySelector('.modal');
@@ -10,6 +9,8 @@ function displayModal() {
   document.body.setAttribute('data-modal-open', 'true');
   modal.setAttribute('aria-hidden', 'false');
   modal.querySelector('form input').focus();
+
+  modal.addEventListener('keyup', handleKeyNavModal);
 }
 
 function closeModal() {
@@ -18,9 +19,21 @@ function closeModal() {
   document.body.setAttribute('aria-hidden', 'false');
   document.body.setAttribute('data-modal-open', 'false');
   modal.setAttribute('aria-hidden', 'true');
-  document.querySelector('.contact_button').focus();
   modalForm.style.display = 'block';
   modalSuccessMessage.style.display = 'none';
+  modal.removeEventListener('keyup', handleKeyNavModal);
+
+  // Set a timeout to avoid global keyup listener to be fired twice.
+  setTimeout(() => {
+    document.querySelector('.contact_button').focus();
+  }, 250);
+}
+
+function handleKeyNavModal(e) {
+  if (e.key === 'Escape') {
+    e.preventDefault();
+    closeModal();
+  }
 }
 
 /**
@@ -53,6 +66,7 @@ function resetErrorMessages() {
  */
 function validate() {
   let state = true;
+  const regex_email = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
   const firstname = document.forms['contact-form']['firstname'];
   const lastname = document.forms['contact-form']['lastname'];
   const email = document.forms['contact-form']['email'];

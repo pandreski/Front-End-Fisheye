@@ -14,6 +14,7 @@ function mediaFactory(data) {
       media = document.createElement('img');
       media.src = `assets/images/${photographerId}/${image}`;
       media.alt = `Photographie "${title}"`;
+      media.setAttribute('tabindex', '0');
       media.setAttribute('loading', 'lazy');
     } else if (typeof video !== 'undefined') {
       media = document.createElement('video');
@@ -22,6 +23,7 @@ function mediaFactory(data) {
       const mediaSource = document.createElement('source');
       mediaSource.src = `assets/images/${photographerId}/${video}`;
       mediaSource.type = 'video/mp4';
+      media.setAttribute('tabindex', '0');
       media.appendChild(mediaSource);
       media.innerHTML += 'Your browser does not support the video tag.';
     }
@@ -67,11 +69,12 @@ function mediaFactory(data) {
 
   function handleLike(evt) {
     evt.preventDefault();
-    const isSelected = evt.target.parentNode.getAttribute('aria-selected');
+    const target = evt.target.localName === 'button' ? evt.target : evt.target.parentNode
+    const isSelected = target.getAttribute('aria-selected');
     if (typeof isSelected === 'undefined') {
       return;
     }
-    updateMediaLike(isSelected === 'true', evt.target.parentNode)
+    updateMediaLike(isSelected === 'true', target);
   }
 
   /**

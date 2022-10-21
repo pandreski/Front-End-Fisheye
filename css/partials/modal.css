@@ -35,6 +35,14 @@ body[data-modal-open="true"] .overlay {
   margin: 70px auto;
 }
 
+.modal .close-btn {
+  border: none;
+  border-radius: 0;
+  background: none;
+  margin: 0;
+  padding: 0;
+}
+
 .modal-wrapper header {
   justify-content: space-between;
   width: 100%;

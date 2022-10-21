@@ -82,3 +82,7 @@
     background-color: var(--color-secondary);
     color: black;
 }
+
+#listboxSort > div:focus {
+  outline-color: #fff;
+}

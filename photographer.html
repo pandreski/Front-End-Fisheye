@@ -13,7 +13,7 @@
   <body aria-hidden="false" data-modal-open="false" data-lightbox-open="false">
     <header>
       <a href="index.html" aria-label="Retour à la page d'accueil">
-        <img src="assets/images/logo.png" alt="Logo Fisheye" class="logo">
+        <img src="assets/images/logo.png" alt="Fisheye page d'accueil" class="logo">
       </a>
     </header>
     <main id="main">
@@ -35,9 +35,9 @@
               id="listboxSort"
               aria-labelledby="listboxSortLabel"
               aria-activedescendant="listboxSort-1">
-            <div role="option" id="listboxSort-1" aria-selected="true">Popularité</div>
-            <div role="option" id="listboxSort-2" aria-selected="false">Date</div>
-            <div role="option" id="listboxSort-3" aria-selected="false">Titre</div>
+            <div role="option" id="listboxSort-1" tabindex="0" aria-selected="true">Popularité</div>
+            <div role="option" id="listboxSort-2" tabindex="0" aria-selected="false">Date</div>
+            <div role="option" id="listboxSort-3" tabindex="0" aria-selected="false">Titre</div>
           </div>
         </div>
       </div>
@@ -56,7 +56,9 @@
       <div class="modal-wrapper">
         <header>
           <h2 id="modal-title">Contactez-moi</h2>
-          <img src="assets/icons/close-white.svg" alt="Fermer la modale" class="close-btn">
+          <button type="button" class="close-btn" aria-label="Fermer la modale">
+            <img src="assets/icons/close-white.svg" alt="">
+          </button>
         </header>
         <form id="contact-form" method="post" target="frame" aria-hidden="false">
           <div class="form-data">
@@ -79,7 +81,7 @@
             <textarea id="message" name="message" aria-labelledby="message-label" aria-required="true"></textarea>
           </div>
   
-          <button type="submit" class="contact_button">Envoyer</button>
+          <button type="submit" class="contact_button btn">Envoyer</button>
         </form>
         <div class="confirmation" aria-hidden="true">Votre message a bien été envoyé</div>
       </div>
@@ -96,6 +98,7 @@
     </div>
     <div class="overlay"></div>
     <iframe name="frame"></iframe>
+    <script src="scripts/main.js"></script>
     <script src="scripts/factories/photographer.js"></script>
     <script src="scripts/factories/media.js"></script>
     <script src="scripts/component/lightbox.js"></script>
