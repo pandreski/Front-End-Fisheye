@@ -13,7 +13,7 @@ function mediaFactory(data) {
     if (typeof image !== 'undefined') {
       media = document.createElement('img');
       media.src = `assets/images/${photographerId}/${image}`;
-      media.alt = `Photographie "${title}"`;
+      media.setAttribute('aria-label', `${title}, agrandir l'image`);
       media.setAttribute('tabindex', '0');
       media.setAttribute('loading', 'lazy');
     } else if (typeof video !== 'undefined') {
@@ -23,11 +23,11 @@ function mediaFactory(data) {
       const mediaSource = document.createElement('source');
       mediaSource.src = `assets/images/${photographerId}/${video}`;
       mediaSource.type = 'video/mp4';
+      media.setAttribute('aria-label', `${title}, agrandir la vidéo`);
       media.setAttribute('tabindex', '0');
       media.appendChild(mediaSource);
       media.innerHTML += 'Your browser does not support the video tag.';
     }
-    media.setAttribute('aria-label', 'Cliquez sur cette image pour l\'agrandir');
     media.setAttribute('data-media-id', id);
     media.addEventListener('click', handleMediaClick);
 
@@ -51,7 +51,7 @@ function mediaFactory(data) {
     const counterButton = document.createElement('button');
     counterButton.classList.add('like-button');
     counterButton.setAttribute('aria-label', 'likes');
-    counterButton.setAttribute('aria-selected', 'false');
+    counterButton.setAttribute('data-selected', 'false');
     counterButton.setAttribute('aria-controls', 'counter_' + id);
     counterButton.innerHTML = `<i class="fa-regular fa-heart"></i><i class="fa-solid fa-heart"></i>`;
     counterButton.addEventListener('click', handleLike);
@@ -70,7 +70,7 @@ function mediaFactory(data) {
   function handleLike(evt) {
     evt.preventDefault();
     const target = evt.target.localName === 'button' ? evt.target : evt.target.parentNode
-    const isSelected = target.getAttribute('aria-selected');
+    const isSelected = target.getAttribute('data-selected');
     if (typeof isSelected === 'undefined') {
       return;
     }
@@ -90,10 +90,10 @@ function mediaFactory(data) {
 
     if (!isSelected) {
       counter.innerText = sum + 1;
-      target.setAttribute('aria-selected', 'true');
+      target.setAttribute('data-selected', 'true');
     } else {
       counter.innerText = sum - 1;
-      target.setAttribute('aria-selected', 'false');
+      target.setAttribute('data-selected', 'false');
     }
     updateTotalLikes(isSelected);
   }

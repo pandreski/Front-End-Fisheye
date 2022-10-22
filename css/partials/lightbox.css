@@ -67,4 +67,6 @@
   right: 0;
   transform: translateX(calc(100% + 30px));
   cursor: pointer;
+  border: none;
+  background: none;
 }
