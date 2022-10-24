@@ -26,6 +26,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-width: calc(100% - 100px);
+  margin: 0 auto;
 }
 
 .lightbox .lightbox-title {
@@ -41,6 +43,11 @@
   margin: 0 auto;
 }
 
+.lightbox video {
+  max-width: 100%;
+  height: auto;
+}
+
 .lightbox-navigation {
   position: absolute;
   top: 50%;
@@ -52,20 +59,19 @@
 }
 
 .lightbox-navigation.next {
-  right: 0;
-  transform: translate(100%, -50%);
+  right: 5px;
+  transform: translate(0, -50%);
 }
 
 .lightbox-navigation.prev {
-  left: 0;
-  transform: translate(-100%, -50%) rotate(180deg);
+  left: 5px;
+  transform: translate(0, -50%) rotate(180deg);
 }
 
 .lightbox .close-btn {
   position: absolute;
   top: 30px;
-  right: 0;
-  transform: translateX(calc(100% + 30px));
+  right: 5px;
   cursor: pointer;
   border: none;
   background: none;

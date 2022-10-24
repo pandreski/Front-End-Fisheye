@@ -4,36 +4,29 @@
 
 .photograph-header {
   background-color: var(--color-light-grey);
-  padding: 55px 50px;
-  min-height: 300px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  border-radius: 5px;
+  padding: 30px 20px;
+  margin-top: 30px;
 }
 
-.photograph-header__data {
-  flex: 0 1 33.333%;
+.photograph-header__contact {
+  text-align: center;
+  margin-top: 1.5em;
 }
+
 .photograph-header__data .legend {
   font-size: 1.125em;
   margin-top: 1em;
   color: var(--color-dark-grey);
 }
 
-.photograph-header__contact {
-  flex: 0 1 33.333%;
-  align-items: center;
-}
-
 .photograph-header__image {
-  flex: 0 1 33.333%;
-  align-items: center;
+  margin-top: 1.5em;
 }
 
 .photograph-header__image img {
   display: block;
-  margin-left: auto;
-  margin-right: 0;
+  margin: 0 auto;
 }
 
 .contact_button {
@@ -43,10 +36,10 @@
 
 .artworks {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  row-gap: 30px;
-  column-gap: 95px;
-  margin-top: 55px;
+  grid-template-columns: repeat(1, 1fr);
+  row-gap: 20px;
+  column-gap: 20px;
+  margin-top: 30px;
 }
 
 .card-artwork .media-wrapper {
@@ -131,13 +124,14 @@
 .photographer-infos {
   position: fixed;
   bottom: 0;
-  right: 36px;
+  right: 20px;
   background-color: var(--color-secondary);
   color: black;
   display: flex;
   padding: 20px 34px 14px;
-  font-size: 1.5em;
+  font-size: 1em;
   border-radius: 5px 5px 0 0;
+  z-index: 10;
 }
 
 .photographer-infos .price {
@@ -155,4 +149,55 @@
 
 .user-not-found p, .user-not-found .btn {
   margin-top: 1em;
+}
+
+/* md */
+@media screen and (min-width: 768px) {
+  .artworks {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* lg */
+@media screen and (min-width: 992px) {
+  .photograph-header {
+    padding: 55px 50px;
+    min-height: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .photograph-header__contact {
+    flex: 0 1 33.333%;
+    align-items: center;
+    margin-top: 0;
+  }
+  
+  .photograph-header__data {
+    flex: 0 1 33.333%;
+  }
+
+  .photograph-header__image {
+    flex: 0 1 33.333%;
+    align-items: center;
+    margin-top: 0;
+  }
+
+  .photograph-header__image img {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  .artworks {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 30px;
+    column-gap: 95px;
+    margin-top: 55px;
+  }
+
+  .photographer-infos {
+    font-size: 1.5em;
+    right: 36px;
+  }
 }
