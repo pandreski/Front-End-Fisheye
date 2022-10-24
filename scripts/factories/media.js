@@ -13,7 +13,7 @@ function mediaFactory(data) {
     if (typeof image !== 'undefined') {
       media = document.createElement('img');
       media.src = `assets/images/${photographerId}/${image}`;
-      media.setAttribute('aria-label', `${title}, agrandir l'image`);
+      media.alt = `${title}, agrandir l'image`;
       media.setAttribute('tabindex', '0');
       media.setAttribute('loading', 'lazy');
     } else if (typeof video !== 'undefined') {
@@ -53,7 +53,7 @@ function mediaFactory(data) {
     counterButton.setAttribute('aria-label', 'likes');
     counterButton.setAttribute('data-selected', 'false');
     counterButton.setAttribute('aria-controls', 'counter_' + id);
-    counterButton.innerHTML = `<i class="fa-regular fa-heart"></i><i class="fa-solid fa-heart"></i>`;
+    counterButton.innerHTML = `<em class="fa-regular fa-heart"></em><em class="fa-solid fa-heart"></em>`;
     counterButton.addEventListener('click', handleLike);
 
     likeCounterWrapper.appendChild(counter);
