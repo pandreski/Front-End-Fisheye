@@ -124,6 +124,12 @@ function validate() {
 
   // In case of success, hide form, display success message and reset all fields to get ready for a new submission.
   if (state) {
+    console.group()
+    console.log(firstname.value + ' ' + lastname.value);
+    console.log(email.value);
+    console.log(message.value);
+    console.groupEnd()
+    
     modalForm.style.display = 'none';
     modalSuccessMessage.style.display = 'block';
     modalForm.reset();
