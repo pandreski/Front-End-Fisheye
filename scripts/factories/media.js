@@ -45,15 +45,17 @@ function mediaFactory(data) {
 
     const counter = document.createElement('div');
     counter.classList.add('counter');
+    counter.setAttribute('aria-label', `Nombre de j'aime pour ${title}`)
     counter.id = 'counter_' + id;
     counter.innerText = likes;
 
     const counterButton = document.createElement('button');
     counterButton.classList.add('like-button');
-    counterButton.setAttribute('aria-label', 'likes');
+    counterButton.setAttribute('aria-label', `Aimer l'oeuvre ${title}`);
     counterButton.setAttribute('data-selected', 'false');
     counterButton.setAttribute('aria-controls', 'counter_' + id);
     counterButton.innerHTML = `<em class="fa-regular fa-heart"></em><em class="fa-solid fa-heart"></em>`;
+    counterButton.addEventListener('keydown', (e) => e.key === 'Enter' && e.preventDefault()); // Fix event firing twice on "Enter" key press
     counterButton.addEventListener('click', handleLike);
 
     likeCounterWrapper.appendChild(counter);
@@ -68,6 +70,7 @@ function mediaFactory(data) {
   }
 
   function handleLike(evt) {
+    evt.stopPropagation();
     evt.preventDefault();
     const target = evt.target.localName === 'button' ? evt.target : evt.target.parentNode
     const isSelected = target.getAttribute('data-selected');

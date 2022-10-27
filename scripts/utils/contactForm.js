@@ -1,9 +1,9 @@
 // DOM Elements
 const modalForm = document.querySelector('.modal form');
 const modalSuccessMessage = document.querySelector('.modal .confirmation');
+const modal = document.querySelector('.modal');
 
 function displayModal() {
-  const modal = document.querySelector('.modal');
   modal.style.display = 'block';
   document.body.setAttribute('aria-hidden', 'true');
   document.body.setAttribute('data-modal-open', 'true');
@@ -14,7 +14,6 @@ function displayModal() {
 }
 
 function closeModal() {
-  const modal = document.querySelector('.modal');
   modal.style.display = 'none';
   document.body.setAttribute('aria-hidden', 'false');
   document.body.setAttribute('data-modal-open', 'false');
@@ -133,6 +132,7 @@ function validate() {
     modalForm.style.display = 'none';
     modalSuccessMessage.style.display = 'block';
     modalForm.reset();
+    modal.querySelector('.close-btn').focus();
   }
 
   return state;
