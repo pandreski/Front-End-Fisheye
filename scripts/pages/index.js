@@ -1,3 +1,8 @@
+/**
+ * Fetch photographers data
+ * 
+ * @return {Object} photographer data list
+ */
 async function getPhotographers() {
   try {
     const data = await fetch('./data/photographers.json')
